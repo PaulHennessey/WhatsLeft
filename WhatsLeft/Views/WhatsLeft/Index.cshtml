@@ -1,0 +1,41 @@
+﻿@model  WhatsLeft.Models.AccountsViewModel
+
+<table id="productTable">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Balance
+        </th>
+    </tr>
+
+    @foreach (var account in Model.Accounts)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => account.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => account.Balance)
+            </td>
+        </tr>
+        foreach (var virtualAccount in account.VirtualAccounts)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => virtualAccount.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => virtualAccount.Balance)
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+<p>
+    @Html.ActionLink("Add a new Product", "Create")
+</p>
+
+<script src="@Url.Content("~/Scripts/MyFoodDiaryProducts.js")" type="text/javascript"></script>
