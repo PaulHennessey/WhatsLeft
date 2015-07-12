@@ -8,7 +8,7 @@ namespace WhatsLeft.Data
         public WhatsLeftContext() : base("WhatsLeft")
         {}
 
-        public DbSet<Account> Accounts { get; set; }
-        public DbSet<VirtualAccount> VirtualAccounts { get; set; }
+        public DbSet<BankAccount> Accounts { get; set; }
+        public DbSet<Fund> VirtualAccounts { get; set; }
     }
 }

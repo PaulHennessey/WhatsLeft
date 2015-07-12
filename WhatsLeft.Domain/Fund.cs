@@ -1,7 +1,7 @@
 ﻿
 namespace WhatsLeft.Domain
 {
-    public class VirtualAccount
+    public class Fund
     {
         public int Id { get; set; }
         public string Name { get; set; }

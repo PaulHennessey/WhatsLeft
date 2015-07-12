@@ -6,8 +6,23 @@ using WhatsLeft.Domain;
 
 namespace WhatsLeft.Models
 {
-    public class AccountsViewModel
+    public class BankAccountsViewModel
     {
-        public List<Account> Accounts { get; set; }
+        public List<BankAccount> BankAccounts { get; set; }
+    }
+
+    public class BankAccountViewModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Balance { get; set; }
+        public virtual ICollection<Fund> Funds { get; set; }
+    }
+
+    public class FundViewModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Balance { get; set; }     
     }
 }

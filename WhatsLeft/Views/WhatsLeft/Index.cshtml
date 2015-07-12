@@ -1,6 +1,6 @@
-﻿@model  WhatsLeft.Models.AccountsViewModel
+﻿@model  WhatsLeft.Models.BankAccountsViewModel
 
-<table id="productTable">
+<table id="productTable" class="table">
     <tr>
         <th>
             Name
@@ -10,32 +10,44 @@
         </th>
     </tr>
 
-    @foreach (var account in Model.Accounts)
+    @foreach (var account in Model.BankAccounts)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => account.Name)
+                <strong>
+                    @Html.DisplayFor(modelItem => account.Name)
+                </strong>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => account.Balance)
             </td>
         </tr>
-        foreach (var virtualAccount in account.VirtualAccounts)
+        foreach (var fund in account.Funds)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => virtualAccount.Name)
+                    @Html.DisplayFor(modelItem => fund.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => virtualAccount.Balance)
+                    @Html.DisplayFor(modelItem => fund.Balance)
                 </td>
             </tr>
         }
+
+        <tr>
+            <td>
+
+                @Html.ActionLink("Add a new fund", "CreateFund", new { id = account.Id })
+            </td>
+        </tr>
+
     }
 </table>
 
+
 <p>
-    @Html.ActionLink("Add a new Product", "Create")
+    @Html.ActionLink("Add a new account", "CreateAccount")
 </p>
 
-<script src="@Url.Content("~/Scripts/MyFoodDiaryProducts.js")" type="text/javascript"></script>
+
+
