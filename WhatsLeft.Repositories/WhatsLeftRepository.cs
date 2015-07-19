@@ -12,125 +12,49 @@ namespace WhatsLeft.Repositories
     {
         readonly WhatsLeftContext context = new WhatsLeftContext();
 
-        //public void InsertAccountAndSave(ref Account account)
-        //{
-        //    context.Accounts.Add(account);
-        //    context.SaveChanges();
-        //}
-
-        //public List<Account> GetAccounts()
-        //{
-        //    return context.Accounts.ToList();
-        //}
-
-        public List<BankAccount> GetAccounts()
+        public void DeleteFund(int fundId)
         {
-            List<BankAccount> accounts = new List<BankAccount>();
-
-            accounts.Add(new BankAccount
-                {
-                    Id = 1,
-                    Name = "PaulCurrent",
-                    Balance = 1000,
-                    Funds = new List<Fund>
-                    {
-                        new Fund
-                        {
-                            Id = 1,
-                            Name = "What's left?",
-                            Balance = 300
-                        },
-                        new Fund
-                        {
-                            Id = 2,
-                            Name = "Holiday",
-                            Balance = 200
-                        },
-                        new Fund
-                        {
-                            Id = 3,
-                            Name = "Bike",
-                            Balance = 500
-                        }
-                    }
-                });
-
-            //accounts.Add(new Account
-            //{
-            //    Id = 2,
-            //    Name = "FretwireCurrent",
-            //    Balance = 10000,
-            //    Funds = new List<Fund>
-            //        {
-            //            new Fund
-            //            {
-            //                Id = 1,
-            //                Name = "What's left?",
-            //                Balance = 3000
-            //            },
-            //            new Fund
-            //            {
-            //                Id = 2,
-            //                Name = "Tax",
-            //                Balance = 2000
-            //            },
-            //            new Fund
-            //            {
-            //                Id = 3,
-            //                Name = "Emergencies",
-            //                Balance = 5000
-            //            }
-            //        }
-            //});
-
-            return accounts;
+            Fund fund = context.Funds.Where(f => f.FundId == fundId).FirstOrDefault();
+            context.Funds.Remove(fund);
+            context.SaveChanges();
         }
 
-        public BankAccount GetAccountById(int id)
+        public void DeleteAccount(int accountId)
         {
-            return new BankAccount
-            {
-                Id = 1,
-                Name = "PaulCurrent",
-                Balance = 1000,
-                Funds = new List<Fund>
-                    {
-                        new Fund
-                        {
-                            Id = 1,
-                            Name = "What's left?",
-                            Balance = 300
-                        },
-                        new Fund
-                        {
-                            Id = 2,
-                            Name = "Holiday",
-                            Balance = 200
-                        },
-                        new Fund
-                        {
-                            Id = 3,
-                            Name = "Bike",
-                            Balance = 500
-                        }
-                    }
-            };
+            BankAccount account = context.Accounts.Where(a => a.BankAccountId == accountId).FirstOrDefault();
+            context.Accounts.Remove(account);
+            context.SaveChanges();
         }
 
-        //public Account GetAccountById(int id)
-        //{
-        //    return context.Accounts.Find(id);
-        //}
+        public void InsertBankAccount(BankAccount bankAccount)
+        {
+            context.Accounts.Add(bankAccount);
+            context.SaveChanges();
+        }
 
-        //public void UpdateAccountAndSave(ref Account account)
-        //{
-        //    int i = account.Id;
-        //    var acc = context.Accounts.FirstOrDefault(a => a.Id == i);
-        //    acc.Name = account.Name;
-        //    acc.VirtualAccounts = account.VirtualAccounts;
+        public void UpdateBankAccount(BankAccount bankAccount)
+        {
+            BankAccount account = context.Accounts.Where(b => b.BankAccountId == bankAccount.BankAccountId).FirstOrDefault();
+            account.Name = bankAccount.Name;
+            account.Balance = bankAccount.Balance;
+            account.Funds = bankAccount.Funds;
+            context.SaveChanges();
+        }
 
-        //    context.SaveChanges();
-        //}
+        public void InsertFund(Fund fund)
+        {
+            context.Funds.Add(fund);
+            context.SaveChanges();
+        }
 
+        public List<BankAccount> GetBankAccounts()
+        {
+            return context.Accounts.ToList();
+        }
+
+        public BankAccount GetBankAccountById(int id)
+        {
+            return context.Accounts.Where(a => a.BankAccountId == id).FirstOrDefault();
+        }
     }
 }

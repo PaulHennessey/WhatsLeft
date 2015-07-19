@@ -15,22 +15,12 @@
         @Html.ValidationMessageFor(model => model.Name)
     </div>
 
-
-    <div class="editor-label">
-        @Html.LabelFor(model => model.Balance)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.Balance)
-        @Html.ValidationMessageFor(model => model.Balance)
-    </div>
-
     <p>
         <input type="submit" value="Create" />
     </p>
+    
+    @Html.HiddenFor(model => model.BankAccountId)
 
+    @Html.ActionLink("Back to account", "Edit", new { accountId = Model.BankAccountId })
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 

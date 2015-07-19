@@ -9,6 +9,6 @@ namespace WhatsLeft.Data
         {}
 
         public DbSet<BankAccount> Accounts { get; set; }
-        public DbSet<Fund> VirtualAccounts { get; set; }
+        public DbSet<Fund> Funds { get; set; }
     }
 }

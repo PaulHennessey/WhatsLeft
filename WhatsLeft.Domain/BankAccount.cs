@@ -1,12 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace WhatsLeft.Domain
 {
     public class BankAccount
     {
-        public int Id { get; set; }
+        // Primary key
+        public int BankAccountId { get; set; }
         public string Name { get; set; }
         public int Balance { get; set; }
+
+        // Navigation property
         public virtual ICollection<Fund> Funds { get; set; }
     }
 }

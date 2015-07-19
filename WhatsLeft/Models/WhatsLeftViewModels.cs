@@ -8,7 +8,12 @@ namespace WhatsLeft.Models
 {
     public class BankAccountsViewModel
     {
-        public List<BankAccount> BankAccounts { get; set; }
+        public BankAccountsViewModel()
+        {
+            BankAccounts = new List<BankAccountViewModel>();
+        }
+
+        public List<BankAccountViewModel> BankAccounts { get; set; }
     }
 
     public class BankAccountViewModel
@@ -17,12 +22,19 @@ namespace WhatsLeft.Models
         public string Name { get; set; }
         public int Balance { get; set; }
         public virtual ICollection<Fund> Funds { get; set; }
+
+        public int WhatsLeft { get; set; }
+
+        public int FromFundId { get; set; }
+        public int ToFundId { get; set; }
+        public int Amount { get; set; }
     }
 
     public class FundViewModel
     {
-        public int Id { get; set; }
+        public int FundId { get; set; }
         public string Name { get; set; }
-        public int Balance { get; set; }     
+        public int Balance { get; set; } 
+        public int BankAccountId { get; set; }
     }
 }
