@@ -31,6 +31,14 @@
     @using (Html.BeginForm("Transfer", "WhatsLeft"))
     {
 
+        <tr>
+            <td>
+                <div class='col-sm-6'>
+                    <input type="text" class="form-control" id="NextPayDate" name="NextPayDate" />
+                </div>
+            </td>
+        </tr>
+
 
         foreach (var fund in Model.Funds)
         {

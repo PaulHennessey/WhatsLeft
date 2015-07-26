@@ -1,5 +1,7 @@
 ﻿@model  WhatsLeft.Models.BankAccountsViewModel
 
+@Scripts.Render("~/bundles/jqueryui")
+
 <table id="productTable" class="table">
     <tr>
         <th>
@@ -36,6 +38,7 @@
 <p>
     @Html.ActionLink("Add a new account", "CreateAccount")
 </p>
+
 
 <script src="@Url.Content("~/Scripts/whatsleft.js")" type="text/javascript"></script>
 

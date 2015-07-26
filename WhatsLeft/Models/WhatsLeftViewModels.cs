@@ -28,6 +28,8 @@ namespace WhatsLeft.Models
         public int FromFundId { get; set; }
         public int ToFundId { get; set; }
         public int Amount { get; set; }
+
+        public DateTime NextPayDate { get; set; }
     }
 
     public class FundViewModel

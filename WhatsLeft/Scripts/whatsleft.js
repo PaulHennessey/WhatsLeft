@@ -1,4 +1,12 @@
-﻿var funds = (function ($) {
+﻿$(function () {
+
+    $('#NextPayDate').datetimepicker();
+
+});
+
+var funds = (function ($) {
+
+//    $('#datetimepicker').datetimepicker();
 
     var UpdateUrl = "/whatsleft/update";
 
