@@ -12,5 +12,6 @@ namespace WhatsLeft.Domain
 
         // Navigation property
         public virtual ICollection<Fund> Funds { get; set; }
+        public virtual ICollection<RegularPayment> RegularPayments { get; set; }
     }
 }

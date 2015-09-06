@@ -24,13 +24,22 @@ namespace WhatsLeft
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/moment.js",
-                      "~/Scripts/bootstrap-datetimepicker.js",
+                      "~/Scripts/bootstrap-datepicker.js",
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
+                      "~/Scripts/DataTables/jquery.dataTables.js",
+                      "~/Scripts/DataTables/dataTables.bootstrap.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/whatsleft").Include(
+                      "~/Scripts/whatsleft.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/DataTables/css/jquery.dataTables.css",
+                      "~/Content/DataTables/css/dataTables.bootstrap.css",
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-datepicker3.css",
                       "~/Content/site.css"));
         }
     }

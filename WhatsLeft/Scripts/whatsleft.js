@@ -1,28 +1,33 @@
-﻿$(function () {
+﻿var funds = (function ($) {
 
-    $('#NextPayDate').datetimepicker();
+    $('#NextPayDay').datepicker({ format: 'dd/mm/yyyy' });
 
-});
+    $('#productTable').DataTable({
+        "paging": false,
+        "ordering": false,
+        "info": false
+    });
 
-var funds = (function ($) {
+    $('#regularPaymentsTable').DataTable({
+        "paging": false,
+        "ordering": false,
+        "info": false
+    });
 
-//    $('#datetimepicker').datetimepicker();
+    $('#fundsTable').DataTable({
+        "paging": false,
+        "ordering": false,
+        "info": false
+    });
+
+
 
     var UpdateUrl = "/whatsleft/update";
 
-    $(".DeleteAccountLink").on("click", DeleteAccountLinkClick);
-    $(".DeleteFundLink").on("click", DeleteFundLinkClick);
+    $(".DeleteLink").on("click", DeleteLinkClick);
     $(".UpdateBalanceLink").on("click", UpdateBalanceClick);
 
-    function DeleteFundLinkClick(e) {
-
-        if (confirm("Delete?"))
-            return window.location.href = this.href;
-
-        e.preventDefault();
-    }
-
-    function DeleteAccountLinkClick(e) {
+    function DeleteLinkClick(e) {
 
         if (confirm("Delete?"))
             return window.location.href = this.href;
@@ -36,13 +41,16 @@ var funds = (function ($) {
         e.preventDefault();
         
         var id = $("#Id").val();
-
         var balance = $("#Balance").val();
-
-        var link = this.href + "/" + id + "/" + balance;
+        var nextPayDate = $("#NextPayDate").val();        
+        var link = this.href + "/" + id + "/" + balance + "/" + nextPayDate;
 
         window.location.href = link;
     }
+
+
+    $('#tabs').tab();
+    
 
 })(jQuery);
 

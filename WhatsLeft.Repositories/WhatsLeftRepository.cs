@@ -12,49 +12,62 @@ namespace WhatsLeft.Repositories
     {
         readonly WhatsLeftContext context = new WhatsLeftContext();
 
-        public void DeleteFund(int fundId)
+        public void DeleteRegularPayment(int regularPaymentId)
         {
-            Fund fund = context.Funds.Where(f => f.FundId == fundId).FirstOrDefault();
-            context.Funds.Remove(fund);
+            RegularPayment regularPayment = context.RegularPayments.Where(p => p.RegularPaymentId == regularPaymentId).FirstOrDefault();
+            context.RegularPayments.Remove(regularPayment);
             context.SaveChanges();
         }
 
-        public void DeleteAccount(int accountId)
+        //public void DeleteFund(int fundId)
+        //{
+        //    Fund fund = context.Funds.Where(f => f.FundId == fundId).FirstOrDefault();
+        //    context.Funds.Remove(fund);
+        //    context.SaveChanges();
+        //}
+
+        //public void DeleteAccount(int accountId)
+        //{
+        //    BankAccount account = context.Accounts.Where(a => a.BankAccountId == accountId).FirstOrDefault();
+        //    context.Accounts.Remove(account);
+        //    context.SaveChanges();
+        //}
+
+        //public void InsertBankAccount(BankAccount bankAccount)
+        //{
+        //    context.Accounts.Add(bankAccount);
+        //    context.SaveChanges();
+        //}
+
+        //public void UpdateBankAccount(BankAccount bankAccount)
+        //{
+        //    BankAccount account = context.Accounts.Where(b => b.BankAccountId == bankAccount.BankAccountId).FirstOrDefault();
+        //    account.Name = bankAccount.Name;
+        //    account.Balance = bankAccount.Balance;
+        //    account.Funds = bankAccount.Funds;
+        //    context.SaveChanges();
+        //}
+
+        //public void InsertFund(Fund fund)
+        //{
+        //    context.Funds.Add(fund);
+        //    context.SaveChanges();
+        //}
+
+        public void InsertRegularPayment(RegularPayment regularPayment)
         {
-            BankAccount account = context.Accounts.Where(a => a.BankAccountId == accountId).FirstOrDefault();
-            context.Accounts.Remove(account);
+            context.RegularPayments.Add(regularPayment);
             context.SaveChanges();
         }
 
-        public void InsertBankAccount(BankAccount bankAccount)
-        {
-            context.Accounts.Add(bankAccount);
-            context.SaveChanges();
-        }
+        //public List<BankAccount> GetBankAccounts()
+        //{
+        //    return context.Accounts.ToList();
+        //}
 
-        public void UpdateBankAccount(BankAccount bankAccount)
-        {
-            BankAccount account = context.Accounts.Where(b => b.BankAccountId == bankAccount.BankAccountId).FirstOrDefault();
-            account.Name = bankAccount.Name;
-            account.Balance = bankAccount.Balance;
-            account.Funds = bankAccount.Funds;
-            context.SaveChanges();
-        }
-
-        public void InsertFund(Fund fund)
-        {
-            context.Funds.Add(fund);
-            context.SaveChanges();
-        }
-
-        public List<BankAccount> GetBankAccounts()
-        {
-            return context.Accounts.ToList();
-        }
-
-        public BankAccount GetBankAccountById(int id)
-        {
-            return context.Accounts.Where(a => a.BankAccountId == id).FirstOrDefault();
-        }
+        //public BankAccount GetBankAccountById(int id)
+        //{
+        //    return context.Accounts.Where(a => a.BankAccountId == id).FirstOrDefault();
+        //}
     }
 }

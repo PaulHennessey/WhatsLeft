@@ -1,0 +1,179 @@
+﻿@model  WhatsLeft.Models.BankAccountViewModel
+@using WhatsLeft.Helpers
+
+<div id="content">
+    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+        <li class="active"><a href="#details" data-toggle="tab">Account Details</a></li>
+        <li><a href="#funds" data-toggle="tab">Funds</a></li>
+        <li><a href="#regularPayments" data-toggle="tab">Regular Payments</a></li>
+    </ul>
+    <div id="my-tab-content" class="tab-content">
+        <div class="tab-pane active" id="details">
+            <br />
+            @using (Html.BeginForm("Details", "Home", FormMethod.Post, new { @role = "form" }))
+            {
+
+                <div class="form-group row">
+                    @Html.LabelFor(m => Model.Name, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => Model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(m => Model.Balance, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => Model.Balance, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(m => Model.NextPayDay, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => Model.NextPayDay, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(m => Model.WhatsLeft, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => Model.WhatsLeft, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Update details</button>
+                    </div>
+                </div>
+
+                @Html.HiddenFor(m => m.BankAccountId)
+                @Html.HiddenFor(m => m.UserId)
+
+            }
+        </div>
+
+        <div class="tab-pane" id="funds">
+
+
+
+            <table id="fundsTable" class="table-striped">
+
+                <thead>
+                    <tr>
+                        <th>
+                            Fund Name
+                        </th>
+                        <th>
+                            Amount
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var fund in Model.Funds)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => fund.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => fund.Balance)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "DeleteFund", new { accountId = Model.BankAccountId, fundId = fund.FundId }, new { @class = "DeleteLink" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+            <div>
+                @Html.ActionLink("Add a new fund", "CreateFund", new { accountId = Model.BankAccountId })
+            </div>
+
+            @using (Html.BeginForm("Transfer", "Home", FormMethod.Post, new { @role = "form" }))
+            {
+                <div class="form-group">
+                    <h3>Transfers</h3>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(m => Model.Name, "From...", new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("FromFundId", new SelectList(Model.Funds, "FundId", "Name"), new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(m => Model.Name, "To...", new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("ToFundId", new SelectList(Model.Funds, "FundId", "Name"), new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(m => Model.Amount, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => Model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Transfer</button>
+                    </div>
+                </div>
+
+                @Html.HiddenFor(model => Model.BankAccountId)
+
+            }
+
+        </div>
+        <div class="tab-pane" id="regularPayments">
+
+            <table id="regularPaymentsTable" class="table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Payment Day</th>
+                        <th>Amount</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var regularPayment in Model.RegularPayments)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => regularPayment.Name)
+                            </td>
+                            <td>
+                                @Html.OrdinalFor(modelItem => regularPayment.PaymentDay)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => regularPayment.Amount)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "EditRegularPayment", new { accountId = Model.BankAccountId, regularPaymentId = regularPayment.RegularPaymentId })
+                                @Html.ActionLink("Delete", "DeleteRegularPayment", new { accountId = Model.BankAccountId, regularPaymentId = regularPayment.RegularPaymentId }, new { @class = "DeleteLink" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div>
+                @Html.ActionLink("Add a new regular payment", "CreateRegularPayment", new { accountId = Model.BankAccountId })
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    @Html.ActionLink("Back to accounts summary", "Index")
+</div>
+
+
+
+
+

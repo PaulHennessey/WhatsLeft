@@ -20,12 +20,6 @@ namespace WhatsLeft
             );
 
             routes.MapRoute(
-                name: "DeleteFund",
-                url: "WhatsLeft/DeleteFund/{accountId}/{fundId}",
-                defaults: new { controller = "WhatsLeft", action = "DeleteFund", accountId = UrlParameter.Optional, fundId = UrlParameter.Optional }
-            );
-
-            routes.MapRoute(
                 name: "DeleteAccount",
                 url: "WhatsLeft/DeleteAccount/{accountId}",
                 defaults: new { controller = "WhatsLeft", action = "DeleteAccount", accountId = UrlParameter.Optional }
@@ -33,8 +27,38 @@ namespace WhatsLeft
 
             routes.MapRoute(
                 name: "EditAccount",
-                url: "WhatsLeft/Edit/{accountId}",
-                defaults: new { controller = "WhatsLeft", action = "Edit", accountId = UrlParameter.Optional }
+                url: "Home/Details/{accountId}",
+                defaults: new { controller = "Home", action = "Details", accountId = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "EditRegularPayment",
+                url: "Home/EditRegularPayment/{accountId}/{regularPaymentId}",
+                defaults: new { controller = "Home", action = "EditRegularPayment" }
+            );
+
+            routes.MapRoute(
+                name: "CreateRegularPayment",
+                url: "Home/CreateRegularPayment/{accountId}",
+                defaults: new { controller = "Home", action = "CreateRegularPayment" }
+            );
+
+            routes.MapRoute(
+                name: "DeleteRegularPayment",
+                url: "Home/DeleteRegularPayment/{accountId}/{regularPaymentId}",
+                defaults: new { controller = "Home", action = "DeleteRegularPayment" }
+            );
+
+            routes.MapRoute(
+                name: "CreateFund",
+                url: "Home/CreateFund/{accountId}",
+                defaults: new { controller = "Home", action = "CreateFund" }
+            );
+
+            routes.MapRoute(
+                name: "DeleteFund",
+                url: "Home/DeleteFund/{accountId}/{fundId}",
+                defaults: new { controller = "Home", action = "DeleteFund" }
             );
 
             routes.MapRoute(
